@@ -72,9 +72,6 @@ struct ContentView: View {
                 }
             }
             .navigationTitle("WeSplit")
-            .onTapGesture(perform: {
-                hideKeyboard()
-            })
         }
     }
 }
