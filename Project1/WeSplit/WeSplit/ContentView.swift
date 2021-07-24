@@ -7,6 +7,14 @@
 
 import SwiftUI
 
+#if canImport(UIKit)
+extension View {
+    func hideKeyboard() {
+        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+    }
+}
+#endif
+
 struct ContentView: View {
     @State private var checkAmount = ""
     @State private var numberOfPeople = ""
@@ -64,6 +72,9 @@ struct ContentView: View {
                 }
             }
             .navigationTitle("WeSplit")
+            .onTapGesture(perform: {
+                hideKeyboard()
+            })
         }
     }
 }
