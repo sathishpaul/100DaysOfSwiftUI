@@ -26,33 +26,37 @@ struct ContentView: View {
     }
     
     var body: some View {
-        Form {
-            Section {
-                TextField("Value", text: $inputValue)
-                    .keyboardType(.decimalPad)
+        NavigationView {
+            Form {
+                Section {
+                    TextField("Value", text: $inputValue)
+                        .keyboardType(.decimalPad)
+                }
+                
+                
+                Section(header: Text("Select input unit")) {
+                    Picker("Input unit", selection: $selectedInputUnit) {
+                        ForEach(0 ..< unitStrings.count) {
+                            Text("\(self.unitStrings[$0])")
+                        }
+                    }.pickerStyle(SegmentedPickerStyle())
+                }
+                
+                Section(header: Text("Select output unit")) {
+                    Picker("Output unit", selection: $selectedOutputUnit) {
+                        ForEach(0 ..< unitStrings.count) {
+                            Text("\(self.unitStrings[$0])")
+                        }
+                    }.pickerStyle(SegmentedPickerStyle())
+                }
+                
+                Section(header: Text("Converted result")) {
+                    Text("\(self.computedResult, specifier: "%.4f")")
+                }
             }
-            
-            
-            Section(header: Text("Select input unit")) {
-                Picker("Input unit", selection: $selectedInputUnit) {
-                    ForEach(0 ..< unitStrings.count) {
-                        Text("\(self.unitStrings[$0])")
-                    }
-                }.pickerStyle(SegmentedPickerStyle())
-            }
-            
-            Section(header: Text("Select output unit")) {
-                Picker("Output unit", selection: $selectedOutputUnit) {
-                    ForEach(0 ..< unitStrings.count) {
-                        Text("\(self.unitStrings[$0])")
-                    }
-                }.pickerStyle(SegmentedPickerStyle())
-            }
-            
-            Section(header: Text("Converted result")) {
-                Text("\(self.computedResult, specifier: "%.4f")")
-            }
+            .navigationTitle("Unit converter")
         }
+        
     }
 }
 
