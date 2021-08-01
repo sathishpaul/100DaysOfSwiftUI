@@ -47,12 +47,6 @@ struct ContentView: View {
                 Section {
                     TextField("Amount", text: $checkAmount)
                         .keyboardType(.decimalPad)
-                    
-//                    Picker("Number of people", selection: $numberOfPeople) {
-//                        ForEach(2 ..< 100) {
-//                            Text("\($0) people")
-//                        }
-//                    }
                       TextField("Number of people", text: $numberOfPeople)
                 }
                 
@@ -66,6 +60,7 @@ struct ContentView: View {
                 
                 Section(header: Text("Total amount for the check")) {
                     Text("\(totalWithTip, specifier: "%.2f")")
+                        .foregroundColor(tipPercentage == 4 ? .red : .blue)
                 }
                 Section(header: Text("Amount per person")) {
                     Text("$\(totalPerPerson, specifier: "%.2f")")
